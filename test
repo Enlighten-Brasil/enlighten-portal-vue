@@ -3,7 +3,7 @@
 // layouts
 
 import Admin from "@/layouts/Admin.vue";
-import Auth from "@/layouts/Auth.vue";
+
 
 // views for Admin layout
 
