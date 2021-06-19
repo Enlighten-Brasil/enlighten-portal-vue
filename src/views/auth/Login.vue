@@ -6,8 +6,8 @@
           class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
         >
           <div class="flex-auto p-8 lg:px-10 py-10 pt-0">
-            <form>
-              <div class="relative w-full mb-3 mt-4">
+            <form action="#" @submit.prevent="login">
+              <div class="relative w-full mb-3 mt-8">
                 <label
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlFor="grid-password"
@@ -18,6 +18,9 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="usuario@grupo"
+                  name="username"
+                  id="username"
+                  v-model="username"
                 />
               </div>
 
@@ -32,6 +35,9 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="*********"
+                  name="password"
+                  id="password"
+                  v-model="password"
                 />
               </div>
               <div>
@@ -74,14 +80,23 @@
     </div>
   </div>
 </template>
+
 <script>
-
-
 export default {
+  name: 'login',
   data() {
     return {
-
+      username: '',
+      password: ''
     };
   },
+  methods: {
+    login() {
+      this.$store.dispatch('retrieveToken', {
+        username: this.username,
+        password: this.password
+      })
+    }
+  }
 };
 </script>
