@@ -32,6 +32,7 @@ import Register from "@/views/auth/Register.vue";
 import Landing from "@/views/Landing.vue";
 import Profile from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
+import store from './store'
 
 // routes
 
@@ -94,4 +95,4 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(store).use(router).mount("#app");
