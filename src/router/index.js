@@ -8,7 +8,8 @@ import Auth from "@/layouts/Auth.vue";
 
 // views for portal layout
 import Dashboard from "@/views/portal/Dashboard.vue";
-import Settings from "@/views/portal/Settings.vue";
+import Profile from "@/views/portal/user/Profile.vue";
+import Settings from "@/views/portal/user/Settings.vue";
 import Tables from "@/views/portal/Tables.vue";
 
 // views for Auth layout
@@ -37,7 +38,13 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: "/portal/settings",
+        name: 'profile',
+        path: "/portal/user/profile",
+        component: Profile,
+      },
+      {
+        name: 'settings',
+        path: "/portal/user/settings",
         component: Settings,
       },
       {

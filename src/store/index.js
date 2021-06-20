@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://134.209.124.223'
+axios.defaults.baseURL = (process.env.API_URL) ? process.env.API_URL : 'http://localhost:1337';
 
 export default createStore({
   state: {
@@ -14,41 +14,44 @@ export default createStore({
   },
   mutations: {
     // AUTH BEGGIN
-    retrieveToken(state, token) {
-      state.token = token
-    },
-    destroyToken(state) {
-      state.token = null
+      // LOGIN
+      retrieveToken(state, token) {
+        state.token = token
+      },
+      // LOGOUT
+      destroyToken(state) {
+        state.token = null
     }
     // AUTH END
   },
   actions: {
     // AUTH BEGGIN
-    destroyToken(context) {
-      if (context.getters.loggedIn) {
-        localStorage.removeItem('access_token')
-        context.commit('destroyToken')
-      }
-    },
-    retrieveToken(context, credentials) {
-      return new Promise((resolve, reject) => {
-        axios.post('/auth/local', {
-          identifier: credentials.username,
-          password: credentials.password,
-        })
-          .then(response => {
-            const token = response.data.jwt
-            localStorage.setItem('access_token', token)
-            context.commit('retrieveToken', token)
-            resolve(response)
-            console.log(response);
+      // LOGOUT 
+      // LOGIN
+      retrieveToken(context, credentials) {
+        return new Promise((resolve, reject) => {
+          axios.post('/auth/local', {
+            identifier: credentials.username,
+            password: credentials.password,
           })
-          .catch(error => {
-            console.log(error)
-            reject(error)
+            .then(response => {
+              const token = response.data.jwt
+              localStorage.setItem('access_token', token)
+              context.commit('retrieveToken', token)
+              resolve(response)
+            })
+            .catch(error => {
+              console.log(error)
+              reject(error)
+            })
           })
-        })
-    },    
+      },
+      destroyToken(context) {
+        if (context.getters.loggedIn) {
+          localStorage.removeItem('access_token')
+          context.commit('destroyToken')
+        }
+      }  
     // AUTH END
 
   },

@@ -26,18 +26,18 @@
         block: dropdownPopoverShow,
       }"
     >
-      <a
-        href="javascript:void(0);"
+      <router-link
+        :to="{ name: 'profile' }"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        MeuPerfil
-      </a>
-      <a
-        href="javascript:void(0);"
+        Meu Perfil
+      </router-link>
+      <router-link
+        :to="{ name: 'settings' }"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Configurações
-      </a>
+      </router-link>
       <div class="h-0 my-2 border border-solid border-blueGray-100" />
       <router-link
         :to="{ name: 'logout' }"
