@@ -75,7 +75,7 @@
         <h6
           class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
         >
-          Admin Layout Pages
+          Menu
         </h6>
         <!-- Navigation -->
 
@@ -106,7 +106,7 @@
 
           <li class="items-center">
             <router-link
-              to="/portal/settings"
+              to="/portal/modules"
               v-slot="{ href, navigate, isActive }"
             >
               <a

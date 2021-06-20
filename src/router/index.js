@@ -10,6 +10,7 @@ import Auth from "@/layouts/Auth.vue";
 import Dashboard from "@/views/portal/Dashboard.vue";
 import Profile from "@/views/portal/user/Profile.vue";
 import Settings from "@/views/portal/user/Settings.vue";
+import Modules from "@/views/portal/Modules.vue";
 import Tables from "@/views/portal/Tables.vue";
 
 // views for Auth layout
@@ -46,6 +47,11 @@ const routes = [
         name: 'settings',
         path: "/portal/user/settings",
         component: Settings,
+      },
+      {
+        name: 'modules',
+        path: "/portal/modules",
+        component: Modules,
       },
       {
         path: "/portal/tables",

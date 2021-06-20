@@ -2,57 +2,90 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 
 axios.defaults.baseURL = (process.env.API_URL) ? process.env.API_URL : 'http://localhost:1337';
+// ADD AUTH HEADER
+(localStorage.getItem('access_token')) ? 
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token') : '';
 
 export default createStore({
   state: {
-    token: localStorage.getItem('access_token') || null
+    // AUTH
+    token: localStorage.getItem('access_token') || null,
+    // USER
+    userData: '',
+    userConfig: '',
+    // GROUP
+    groupData: '',
+    // MODULES 
+    modules: []
   },
   getters: {
+    // AUTH
     loggedIn(state) {
       return state.token !== null
     },
+    // USER
+    getUserData(state) {
+      return state.userData !== null
+    },
+    // MODULES
+    getModules(state) {
+      return state.userData !== null
+    }
   },
   mutations: {
-    // AUTH BEGGIN
-      // LOGIN
-      retrieveToken(state, token) {
-        state.token = token
-      },
-      // LOGOUT
-      destroyToken(state) {
-        state.token = null
+    // AUTH / LOGIN
+    retrieveToken(state, token) {
+      state.token = token
+    },
+    // AUTH / LOGOUT
+    destroyToken(state) {
+      state.token = null
+    },
+    // USER / SET DATA
+    retrieveModules(state, modules) {
+      state.modules = modules
     }
-    // AUTH END
   },
   actions: {
-    // AUTH BEGGIN
-      // LOGOUT 
-      // LOGIN
-      retrieveToken(context, credentials) {
-        return new Promise((resolve, reject) => {
-          axios.post('/auth/local', {
-            identifier: credentials.username,
-            password: credentials.password,
+    // AUTH / LOGIN
+    retrieveToken(context, credentials) {
+      return new Promise((resolve, reject) => {
+        axios.post('/auth/local', {
+          identifier: credentials.username,
+          password: credentials.password,
+        })
+          .then(response => {
+            const token = response.data.jwt
+            localStorage.setItem('access_token', token)
+            context.commit('retrieveToken', token)
+            resolve(response)
           })
-            .then(response => {
-              const token = response.data.jwt
-              localStorage.setItem('access_token', token)
-              context.commit('retrieveToken', token)
-              resolve(response)
-            })
-            .catch(error => {
-              console.log(error)
-              reject(error)
-            })
+          .catch(error => {
+            console.log(error)
+            reject(error)
           })
-      },
-      destroyToken(context) {
-        if (context.getters.loggedIn) {
-          localStorage.removeItem('access_token')
-          context.commit('destroyToken')
-        }
-      }  
-    // AUTH END
+        })
+    },
+    // AUTH / LOGOUT
+    destroyToken(context) {
+      if (context.getters.loggedIn) {
+        localStorage.removeItem('access_token')
+        context.commit('destroyToken')
+      }
+    },
+    // MODULES / GET
+    retrieveModules(context) {
+      axios.get('/modules')
+        .then(response => {
+          console.log(response)
+          context.commit('retrieveModules', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    
 
   },
   modules: {
