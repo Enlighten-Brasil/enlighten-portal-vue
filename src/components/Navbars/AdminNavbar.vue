@@ -25,7 +25,7 @@
           </span>
           <input
             type="text"
-            placeholder="Search here..."
+            placeholder="Busca..."
             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
           />
         </div>

@@ -13,14 +13,17 @@ export default createStore({
     },
   },
   mutations: {
+    // AUTH BEGGIN
     retrieveToken(state, token) {
       state.token = token
     },
     destroyToken(state) {
       state.token = null
     }
+    // AUTH END
   },
   actions: {
+    // AUTH BEGGIN
     destroyToken(context) {
       if (context.getters.loggedIn) {
         localStorage.removeItem('access_token')
@@ -28,7 +31,6 @@ export default createStore({
       }
     },
     retrieveToken(context, credentials) {
-
       return new Promise((resolve, reject) => {
         axios.post('/auth/local', {
           identifier: credentials.username,
@@ -36,7 +38,6 @@ export default createStore({
         })
           .then(response => {
             const token = response.data.jwt
-
             localStorage.setItem('access_token', token)
             context.commit('retrieveToken', token)
             resolve(response)
@@ -47,7 +48,9 @@ export default createStore({
             reject(error)
           })
         })
-    },
+    },    
+    // AUTH END
+
   },
   modules: {
   }
