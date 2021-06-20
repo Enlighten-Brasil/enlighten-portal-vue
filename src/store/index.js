@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://todo-laravel.test/api'
+axios.defaults.baseURL = 'http://134.209.124.223'
 
 export default createStore({
   state: {
@@ -22,41 +22,25 @@ export default createStore({
   },
   actions: {
     destroyToken(context) {
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
-
       if (context.getters.loggedIn) {
-        return new Promise((resolve, reject) => {
-          axios.post('/logout')
-            .then(response => {
-              localStorage.removeItem('access_token')
-              context.commit('destroyToken')
-              resolve(response)
-              // console.log(response);
-              // context.commit('addTodo', response.data)
-            })
-            .catch(error => {
-              localStorage.removeItem('access_token')
-              context.commit('destroyToken')
-              reject(error)
-            })
-        })
+        localStorage.removeItem('access_token')
+        context.commit('destroyToken')
       }
     },
     retrieveToken(context, credentials) {
 
       return new Promise((resolve, reject) => {
-        axios.post('/login', {
-          username: credentials.username,
+        axios.post('/auth/local', {
+          identifier: credentials.username,
           password: credentials.password,
         })
           .then(response => {
-            const token = response.data.access_token
+            const token = response.data.jwt
 
             localStorage.setItem('access_token', token)
             context.commit('retrieveToken', token)
             resolve(response)
-            // console.log(response);
-            // context.commit('addTodo', response.data)
+            console.log(response);
           })
           .catch(error => {
             console.log(error)

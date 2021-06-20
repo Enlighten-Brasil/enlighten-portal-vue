@@ -12,12 +12,12 @@
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlFor="grid-password"
                 >
-                  Usuário
+                  Email
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="usuario@grupo"
+                  placeholder="nome@empresa.com"
                   name="username"
                   id="username"
                   v-model="username"
@@ -56,7 +56,7 @@
               <div class="text-center mt-6">
                 <button
                   class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                  type="button"
+                  type="submit"
                 >
                   Entrar
                 </button>
@@ -84,19 +84,39 @@
 <script>
 export default {
   name: 'login',
+  props: {
+    dataSuccessMessage: {
+      type: String,
+    }
+  },
   data() {
     return {
       username: '',
-      password: ''
-    };
+      password: '',
+      serverError: '',
+      successMessage: this.dataSuccessMessage,
+      loading: false,
+    }
   },
   methods: {
     login() {
+      this.loading = true
       this.$store.dispatch('retrieveToken', {
         username: this.username,
-        password: this.password
+        password: this.password,
       })
+        .then(() => {
+          this.loading = false
+          this.$router.push({name: 'portal'})
+        })
+        .catch(error => {
+          this.loading = false
+          this.serverError = error.response.data
+          this.password = ''
+          this.successMessage = ''
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>
