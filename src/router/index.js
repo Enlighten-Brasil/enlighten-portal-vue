@@ -10,6 +10,7 @@ import Auth from "@/layouts/Auth.vue";
 import Dashboard from "@/views/portal/Dashboard.vue";
 import Profile from "@/views/portal/user/Profile.vue";
 import Settings from "@/views/portal/user/Settings.vue";
+import Group from "@/views/portal/workgroup/Group.vue";
 import Modules from "@/views/portal/Modules.vue";
 import Tables from "@/views/portal/Tables.vue";
 
@@ -52,6 +53,11 @@ const routes = [
         name: 'modules',
         path: "/portal/modules",
         component: Modules,
+      },
+      {
+        name: 'group',
+        path: "/portal/workgroup/group",
+        component: Group,
       },
       {
         path: "/portal/tables",
