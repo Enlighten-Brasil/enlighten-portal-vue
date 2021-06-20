@@ -16,7 +16,7 @@ export default createStore({
     // GROUP
     groupData: '',
     // MODULES 
-    modules: []
+    modulesAct: []
   },
   getters: {
     // AUTH
@@ -29,7 +29,7 @@ export default createStore({
     },
     // MODULES
     getModules(state) {
-      return state.userData !== null
+      return state.modulesAct !== null
     }
   },
   mutations: {
@@ -42,8 +42,8 @@ export default createStore({
       state.token = null
     },
     // USER / SET DATA
-    retrieveModules(state, modules) {
-      state.modules = modules
+    retrieveModules(state, modulesAct) {
+      state.modulesAct = modulesAct
     }
   },
   actions: {
@@ -77,7 +77,7 @@ export default createStore({
     retrieveModules(context) {
       axios.get('/modules')
         .then(response => {
-          console.log(response)
+          console.log(response.data)
           context.commit('retrieveModules', response.data)
         })
         .catch(error => {

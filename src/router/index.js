@@ -95,7 +95,7 @@ const routes = [
     path: "/",
     component: Index,
   },
-  { path: "/:pathMatch(.*)*", redirect: "/" },
+  { path: "/:pathMatch(.*)*", redirect: "/portal" },
 ];
 
 const router = createRouter({

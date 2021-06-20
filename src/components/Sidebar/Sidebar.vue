@@ -23,9 +23,6 @@
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none">
         <li class="inline-block relative">
-          <notification-dropdown />
-        </li>
-        <li class="inline-block relative">
           <user-dropdown />
         </li>
       </ul>
