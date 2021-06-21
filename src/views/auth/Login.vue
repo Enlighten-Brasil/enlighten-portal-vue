@@ -126,7 +126,7 @@ export default {
         .catch(error => {
           this.loading = false
           this.successMessage = '';
-
+          console.log(error.response)
           let message = '';
           switch (error.response.status) {
             case 400:
