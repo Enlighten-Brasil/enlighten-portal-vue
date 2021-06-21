@@ -118,9 +118,6 @@ export default {
         .then( response => {
           this.loading = false
           console.log(response)
-          if (response.data ) {
-            //
-          }
           this.toast.success('Dados válidados com sucesso!', {
             timeout: 2000
           });
