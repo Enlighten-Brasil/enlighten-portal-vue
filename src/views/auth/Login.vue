@@ -18,6 +18,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="nome@empresa.com"
+                  required
                   name="username"
                   id="username"
                   v-model="username"
@@ -36,6 +37,7 @@
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="*********"
                   name="password"
+                  required
                   id="password"
                   v-model="password"
                 />
@@ -58,7 +60,7 @@
                   Entrar
                 </button>
                 <button v-else disabled class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
-                  <i class="animate-spin fas fa-spinner"></i>
+                  VALIDANDO...
                 </button>
               </div>
             </form>
@@ -88,17 +90,6 @@ export default {
   setup() {
       // Get toast interface
       const toast = useToast();
-
-      // Use it!
-      toast("I'm a toast!");
-
-      // or with options
-      toast.success("My toast content", {
-        timeout: 2000
-      });
-      // These options will override the options defined in the "app.use" plugin registration for this specific toast
-
-      // Make it available inside methods
       return { toast }
     },
   
@@ -119,20 +110,39 @@ export default {
   },
   methods: {
     login() {
-      this.$notify('Hello user!')
       this.loading = true
       this.$store.dispatch('retrieveToken', {
         username: this.username,
         password: this.password,
       })
-        .then(() => {
+        .then( response => {
           this.loading = false
+          console.log(response)
+          if (response.data ) {
+            //
+          }
+          this.toast.success('Dados válidados com sucesso!', {
+            timeout: 2000
+          });
           this.$router.push({name: 'portal'})
         })
         .catch(error => {
           this.loading = false
-          this.serverError = error.response.data
-          this.successMessage = ''
+          this.successMessage = '';
+
+          let message = '';
+          switch (error.response.status) {
+            case 400:
+              message = 'Dados inválidos, verifique seu email ou senha.';
+              break;
+          
+            default:
+              message = 'Desculpe, houve um problema tente novamente.';
+              break;
+          }
+          this.toast.error(message, {
+            timeout: 2000
+          });
         })
     }
   }
