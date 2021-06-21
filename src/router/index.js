@@ -12,6 +12,7 @@ import Profile from "@/views/portal/user/Profile.vue";
 import Settings from "@/views/portal/user/Settings.vue";
 import Group from "@/views/portal/workgroup/Group.vue";
 import Modules from "@/views/portal/Modules.vue";
+import News from "@/views/portal/News.vue";
 import Tables from "@/views/portal/Tables.vue";
 
 // views for Auth layout
@@ -53,6 +54,11 @@ const routes = [
         name: 'modules',
         path: "/portal/modules",
         component: Modules,
+      },
+      {
+        name: 'news',
+        path: "/portal/news",
+        component: News,
       },
       {
         name: 'group',

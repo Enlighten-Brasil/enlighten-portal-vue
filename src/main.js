@@ -1,6 +1,8 @@
 import { createApp } from "vue";
+import Toast from "vue-toastification";
 
 // styles
+import "vue-toastification/dist/index.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
 
@@ -9,7 +11,6 @@ import router from './router'
 
 // mouting point for the whole app
 import App from "@/App.vue";
-
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -32,5 +33,9 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+// TOAST OPTIONS HERE
+const options = {
+    // You can set your default options here
+};
 
-createApp(App).use(router).use(store).mount("#app");
+createApp(App).use(Toast, options).use(router).use(store).mount("#app");

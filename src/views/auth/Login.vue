@@ -54,11 +54,11 @@
               </div>
 
               <div class="text-center mt-6">
-                <button
-                  class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                  type="submit"
-                >
+                <button v-if="loading == false" class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="submit">
                   Entrar
+                </button>
+                <button v-else disabled class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
+                  <i class="animate-spin fas fa-spinner"></i>
                 </button>
               </div>
             </form>
@@ -82,7 +82,26 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
+
 export default {
+  setup() {
+      // Get toast interface
+      const toast = useToast();
+
+      // Use it!
+      toast("I'm a toast!");
+
+      // or with options
+      toast.success("My toast content", {
+        timeout: 2000
+      });
+      // These options will override the options defined in the "app.use" plugin registration for this specific toast
+
+      // Make it available inside methods
+      return { toast }
+    },
+  
   name: 'login',
   props: {
     dataSuccessMessage: {
@@ -100,6 +119,7 @@ export default {
   },
   methods: {
     login() {
+      this.$notify('Hello user!')
       this.loading = true
       this.$store.dispatch('retrieveToken', {
         username: this.username,
@@ -112,9 +132,7 @@ export default {
         .catch(error => {
           this.loading = false
           this.serverError = error.response.data
-          this.password = ''
           this.successMessage = ''
-          console.log(error)
         })
     }
   }

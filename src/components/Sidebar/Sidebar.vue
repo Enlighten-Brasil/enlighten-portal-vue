@@ -127,7 +127,7 @@
 
           <li class="items-center">
             <router-link
-              to="/portal/tables"
+              to="/portal/news"
               v-slot="{ href, navigate, isActive }"
             >
               <a
@@ -144,7 +144,7 @@
                   class="fas fa-table mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Novidades
+                Noticias
               </a>
             </router-link>
           </li>
@@ -165,7 +165,7 @@
           <li class="items-center">
             <router-link
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-              to="/auth/login"
+              to="/portal/workgroup/group"
             >
               <i class="fas fa-fingerprint text-blueGray-300 mr-2 text-sm"></i>
               Meu Grupo

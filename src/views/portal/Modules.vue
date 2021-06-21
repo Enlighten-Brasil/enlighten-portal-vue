@@ -18,7 +18,7 @@
         <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
           <div class="pr-12">
             <h1 class="text-white font-semibold text-5xl">
-              Modulos Disponiveis
+              Modulos e Serviços
             </h1>
             <p class="mt-4 text-lg text-blueGray-200">
               Acesse todas suas ferramentas em um só lugar.
@@ -35,7 +35,7 @@
             <div class="flex flex-col break-words bg-white w-full mb-6 shadow-lg hover:shadow-md rounded-lg bg-emerald-500">
                 <!-- IMAGE -->
                 <img v-if="module.image_replace_url" alt="Capa do modulo" :src="module.image_replace_url" class="w-full align-middle rounded-t-lg"/>
-                <img v-else-if="module.image" alt="Capa do modulo" :src="'http://localhost:1337' + module.image.formats.medium.url" class="w-full align-middle rounded-t-lg"/>
+                <img v-else-if="module.image" alt="Capa do modulo" :src="'http://localhost:1337' + module.image.url" class="w-full align-middle rounded-t-lg"/>
                 <img v-else alt="Capa do modulo" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="w-full align-middle rounded-t-lg"/>
                 <blockquote class="relative p-4 mb-1">
                 <svg 
@@ -55,7 +55,7 @@
                                 <h4 class="text-xl font-bold text-white">{{module.name}}</h4> 
                             </div>
                             <div class="w-1/2 flex justify-end">
-                                <button class="flex-none flex items-center justify-center w-10 h-10 rounded-full bg-lightBlue-400 text-black " title="Acessar modulo" type="button" aria-label="like">
+                                <button class="flex-none flex items-center text-xl justify-center p-4 hover:shadow-lg rounded-full bg-lightBlue-400 text-white shadow-md" title="Acessar modulo" type="button" aria-label="like">
                                     <i class="fas fa-sign-in-alt"></i>
                                 </button>
                             </div>

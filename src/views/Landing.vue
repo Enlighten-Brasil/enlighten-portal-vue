@@ -226,9 +226,7 @@
                   <li class="py-2">
                     <div class="flex items-center">
                       <div>
-                        <span
-                          class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 mr-3"
-                        >
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 mr-3">
                           <i class="fas fa-fingerprint"></i>
                         </span>
                       </div>
@@ -242,9 +240,7 @@
                   <li class="py-2">
                     <div class="flex items-center">
                       <div>
-                        <span
-                          class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 mr-3"
-                        >
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 mr-3">
                           <i class="fab fa-html5"></i>
                         </span>
                       </div>
@@ -258,9 +254,7 @@
                   <li class="py-2">
                     <div class="flex items-center">
                       <div>
-                        <span
-                          class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 mr-3"
-                        >
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 mr-3">
                           <i class="far fa-paper-plane"></i>
                         </span>
                       </div>
