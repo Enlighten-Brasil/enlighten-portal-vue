@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
-axios.defaults.baseURL = (process.env.API_URL) ? process.env.API_URL : 'http://localhost:1337';
+axios.defaults.baseURL = (process.env.API_URL) ? process.env.API_URL : 'https://api.growmeup.com.br';
 // ADD AUTH HEADER
 (localStorage.getItem('access_token')) ? 
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token') : '';
